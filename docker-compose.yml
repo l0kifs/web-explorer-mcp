@@ -1,0 +1,17 @@
+services:
+  searxng:
+    image: searxng/searxng:latest
+    container_name: web-explorer-searxng
+    ports:
+      - "127.0.0.1:9011:8080"
+    volumes:
+      - ./searxng-config:/etc/searxng:rw
+    environment:
+      - SEARXNG_BASE_URL=http://localhost:9011/
+    restart: unless-stopped
+    networks:
+      - web-explorer-network
+
+networks:
+  web-explorer-network:
+    driver: bridge

@@ -1,0 +1,10 @@
+include LICENSE
+include README.md
+include CHANGELOG.md
+include CONTRIBUTING.md
+include install.sh
+include install.fish
+include uninstall.py
+include docker-compose.yml
+recursive-include searxng-config *.yml
+recursive-include docs *.md
