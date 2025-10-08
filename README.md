@@ -2,12 +2,27 @@
 
 A Model Context Protocol (MCP) server that provides web search and webpage content extraction using a local SearxNG instance.
 
+## Why Web Explorer MCP?
+
+Unlike commercial solutions (GitHub Copilot, Cursor IDE), Web Explorer MCP prioritizes **privacy** and **autonomy**:
+
+| Feature          | Web Explorer MCP               | GitHub Copilot                 | Cursor IDE                          |
+| ---------------- | ------------------------------ | ------------------------------ | ----------------------------------- |
+| **Privacy**      | ✅ Local SearxNG, zero tracking | ❌ Bing API, Microsoft servers  | ❌ Cloud search, third-party APIs    |
+| **Cost**         | ✅ Free, no limits              | 💰 $10-20/month subscription    | 💰 $20/month Pro plan                |
+| **API Keys**     | ✅ None required                | ⚠️ GitHub account required      | ⚠️ Account & subscription            |
+| **Data Control** | ✅ All data stays local         | ❌ Queries sent to Microsoft    | ❌ Queries sent to external services |
+| **Setup**        | ✅ 2 commands                   | ⚠️ Account setup, policy config | ⚠️ Account, payment setup            |
+| **Open Source**  | ✅ Fully auditable              | ⚠️ Partial (client only)        | ❌ Proprietary                       |
+
+**Perfect for:** Developers who value privacy, work with sensitive data, or prefer not to depend on external services and subscriptions.
+
 ## Features
 
 - 🔍 **Web Search** - Search using local SearxNG (private, no API keys)
 - 📄 **Content Extraction** - Extract clean text from webpages
 - 🐳 **Zero Pollution** - Runs in Docker, leaves no traces
-- � **Simple Setup** - Install in 2 commands
+- 🚀 **Simple Setup** - Install in 2 commandsorer MCP
 
 ## Quick Start
 
@@ -41,7 +56,7 @@ That's it! Ask Claude to search the web.
 ## Tools
 
 - **`web_search_tool(query, page, page_size)`** - Search the web
-- **`webpage_content_tool(url, max_chars)`** - Extract webpage content
+- **`webpage_content_tool(url, max_chars, page)`** - Extract webpage content with pagination support
 
 ## Configuration & Usage
 
@@ -76,7 +91,5 @@ uv run web-explorer-mcp  # Run locally
 See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## License
-
-MIT
 
 MIT - see [LICENSE](LICENSE)

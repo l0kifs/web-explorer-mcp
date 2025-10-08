@@ -1,6 +1,6 @@
 [project]
 name = "web-explorer-mcp"
-version = "0.1.0"
+version = "0.2.0"
 description = "MCP server for web search and content extraction using SearxNG"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -39,6 +39,7 @@ web-explorer-mcp = "web_explorer_mcp.entrypoints.mcp.server:main"
 dev = [
     "pytest>=8.4.1",
     "pytest-asyncio>=1.2.0",
+    "pytest-cov>=7.0.0",
     "ruff>=0.13.0",
     "ty>=0.0.1a21",
 ]
@@ -59,14 +60,15 @@ ignore = ["E501", "S101", "S603", "S607"]  # Allow subprocess usage in scripts
 quote-style = "double"
 indent-style = "space"
 
-[tool.ty.environment]
-python = "./.venv"
+[tool.coverage.run]
+branch = true
+source = ["src/web_explorer_mcp"]
+omit = ["tests/*", "**/__init__.py"]
 
-[tool.ty.src]
-include = [
-    "src",
-    "tests",
-]
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 85
 
 [tool.pytest.ini_options]
 minversion = "8.0"

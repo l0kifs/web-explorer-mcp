@@ -94,7 +94,9 @@ def web_search_tool(
 
 
 @mcp.tool()
-def webpage_content_tool(url: str, max_chars: int | None = None) -> dict[str, Any]:
+def webpage_content_tool(
+    url: str, max_chars: int | None = None, page: int = 1
+) -> dict[str, Any]:
     """
     Extract and clean webpage content for a provided URL.
 
@@ -103,19 +105,24 @@ def webpage_content_tool(url: str, max_chars: int | None = None) -> dict[str, An
     url: str
         The URL to fetch and extract.
     max_chars: int, optional
-        Maximum characters to include in the main text. If not provided,
+        Maximum characters per page to include in the main text. If not provided,
         5000 characters are used.
+    page: int, optional
+        Page number to return (default 1). Pagination is applied to main_text.
 
     Returns
     -------
     dict
-        The extractor output: url, title, main_text, headers, length, error
+        The extractor output: url, title, main_text, meta_description, article_body,
+        headers, length, error, page, total_pages, has_next_page
+        - article_body: Primary structured content from semantic containers (article/main)
+        - main_text: Complementary content from other areas (excludes article_body areas)
     """
     if max_chars is None:
         max_chars = settings.webpage.max_chars
 
     return webpage_content_extractor(
-        url=url, max_chars=max_chars, timeout=settings.webpage.timeout
+        url=url, max_chars=max_chars, timeout=settings.webpage.timeout, page=page
     )
 
 

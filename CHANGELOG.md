@@ -16,6 +16,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - None yet
 
+## [0.2.0] - 2025-10-08
+
+### Added
+- **Pagination support** for webpage content extraction with `page` parameter
+- **Enhanced content extraction** with semantic HTML parsing:
+  - Separate `article_body` for primary content from `<article>`/`<main>` tags
+  - Improved `main_text` extraction excluding article content to avoid duplication
+  - Better HTML cleaning with extended tag removal (buttons, forms, SVG)
+  - Meta description extraction from `<meta>` tags
+- **Comprehensive test suite** with 65 tests achieving 92% code coverage
+- **Python testing rules documentation** for consistent testing practices
+- **Improved configuration**:
+  - Added pytest-cov for coverage reporting
+  - Enhanced pytest configuration with custom markers
+  - Better coverage settings with branch coverage
+
+### Changed
+- **README.md**: Added comparison table with commercial alternatives, highlighting privacy benefits
+- **Webpage content tool**: Now supports pagination and returns more structured data
+- **Project structure**: Added complete test suite with fixtures and configuration
+- **Dependencies**: Added pytest-cov for coverage reporting
+
+### Fixed
+- **HTML parsing**: Improved handling of malformed HTML and edge cases
+- **Content extraction**: Better separation of article and complementary content
+
 ## [0.1.0] - 2025-10-06
 
 ### Added
