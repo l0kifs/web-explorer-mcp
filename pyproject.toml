@@ -27,6 +27,7 @@ dependencies = [
     "fastmcp>=2.12.1",
     "beautifulsoup4>=4.13.5",
     "lxml>=6.0.1",
+    "playwright>=1.40.0",
 ]
 
 [project.urls]
@@ -37,6 +38,7 @@ web-explorer-mcp = "web_explorer_mcp.entrypoints.mcp.server:main"
 
 [dependency-groups]
 dev = [
+    "mypy>=1.18.2",
     "pytest>=8.4.1",
     "pytest-asyncio>=1.2.0",
     "pytest-cov>=7.0.0",
@@ -63,7 +65,13 @@ indent-style = "space"
 [tool.coverage.run]
 branch = true
 source = ["src/web_explorer_mcp"]
-omit = ["tests/*", "**/__init__.py"]
+omit = [
+    "tests/*",
+    "**/__init__.py",
+    "**/main.py",  # Entry point scripts
+    "**/server.py",  # MCP server entry points
+    "**/searxng_search_service.py",  # Integration code requiring external SearxNG service
+]
 
 [tool.coverage.report]
 show_missing = true

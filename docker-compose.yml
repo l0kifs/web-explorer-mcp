@@ -12,6 +12,29 @@ services:
     networks:
       - web-explorer-network
 
+  playwright:
+    image: mcr.microsoft.com/playwright:v1.55.0-noble
+    container_name: web-explorer-playwright
+    init: true
+    ipc: host
+    ports:
+      - "127.0.0.1:9012:3000"
+    environment:
+      - DISPLAY=:99
+    command: >
+      sh -c "
+      Xvfb :99 -screen 0 1920x1080x24 -nolisten tcp -nolisten unix &
+      npx -y playwright@1.55.0 run-server --port 3000 --host 0.0.0.0
+      "
+    restart: unless-stopped
+    networks:
+      - web-explorer-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
 networks:
   web-explorer-network:
     driver: bridge

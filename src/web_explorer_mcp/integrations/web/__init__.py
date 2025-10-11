@@ -1,6 +1,9 @@
-from web_explorer_mcp.integrations.web.web_search_extractor import web_search_extractor
-from web_explorer_mcp.integrations.web.webpage_content_extractor import (
-    webpage_content_extractor,
-)
+"""Web integration services."""
 
-__all__ = ["web_search_extractor", "webpage_content_extractor"]
+from .playwright_content_service import PlaywrightWebpageContentService
+from .searxng_search_service import SearxngWebSearchService
+
+__all__ = [
+    "PlaywrightWebpageContentService",
+    "SearxngWebSearchService",
+]

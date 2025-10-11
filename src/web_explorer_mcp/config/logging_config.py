@@ -15,14 +15,15 @@ def logging_config(settings: LoggingSettings) -> None:
 
     logger.remove()
 
-    logger.add(
-        sys.stdout,
-        level=settings.console_log_level,
-        colorize=True,
-        format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <cyan>{name}:{function}:{line}</cyan> - <white>{message}</white> | {extra}",
-    )
+    if settings.log_to_console:
+        logger.add(
+            sys.stdout,
+            level=settings.console_log_level,
+            colorize=True,
+            format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <cyan>{name}:{function}:{line}</cyan> - <white>{message}</white> | {extra}",
+        )
 
-    if settings.log_file_path:
+    if settings.log_to_file:
         if settings.log_file_format.lower() == "json":
             logger.add(
                 settings.log_file_path,
