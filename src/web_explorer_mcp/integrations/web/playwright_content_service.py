@@ -26,7 +26,14 @@ class HeadingDict(TypedDict):
 
 
 class PlaywrightWebpageContentService(WebpageContentService):
-    """Webpage content extraction service using Playwright for JavaScript rendering."""
+    """
+    Webpage content extraction service using Playwright for JavaScript rendering.
+
+    Note: This service only supports remote browser connections via WebSocket.
+    Local browser launching is intentionally not supported to ensure consistent
+    browser environments across different deployment scenarios and to avoid
+    browser installation dependencies in containerized environments.
+    """
 
     def __init__(self, settings: PlaywrightSettings):
         """Initialize the Playwright service with settings."""
@@ -152,8 +159,8 @@ class PlaywrightWebpageContentService(WebpageContentService):
         html_size = len(str(soup))
         logger.debug(f"HTML size: {html_size} bytes")
 
-        # For large pages (>1MB), use simplified fast cleaning to avoid performance issues
-        use_fast_cleaning = html_size > 1_000_000
+        # For large pages, use simplified fast cleaning to avoid performance issues
+        use_fast_cleaning = html_size > self.settings.large_page_threshold_bytes
 
         if use_fast_cleaning:
             logger.debug("Using fast cleaning mode for large page")

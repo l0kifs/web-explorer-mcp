@@ -42,6 +42,7 @@ dev = [
     "pytest>=8.4.1",
     "pytest-asyncio>=1.2.0",
     "pytest-cov>=7.0.0",
+    "pytest-timeout>=2.3.1",
     "ruff>=0.13.0",
     "ty>=0.0.1a21",
 ]
@@ -85,6 +86,10 @@ addopts = [
     "--tb=short",
     "-s"
 ]
+asyncio_mode = "auto"
+timeout = 10
+timeout_method = "thread"
+timeout_func_only = false
 testpaths = ["tests"]
 python_files = ["test_*.py", "*_test.py"]
 python_functions = ["test_*"]
@@ -92,4 +97,6 @@ markers = [
     "asyncio: mark test to be run with asyncio",
     "integration: mark test as integration test",
     "unit: mark test as unit test",
+    "e2e: mark test as end-to-end test",
+    "slow: mark test as slow running (timeout 60s)",
 ]

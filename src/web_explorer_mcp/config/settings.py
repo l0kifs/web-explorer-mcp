@@ -58,6 +58,10 @@ class PlaywrightSettings(BaseModel):
         default="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         description="User agent string for the browser",
     )
+    large_page_threshold_bytes: int = Field(
+        default=50_000,
+        description="HTML size threshold in bytes for switching to fast cleaning mode (default: 500KB)",
+    )
 
 
 # Top-level settings class
