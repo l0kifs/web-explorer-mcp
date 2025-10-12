@@ -17,6 +17,18 @@ Unlike commercial solutions (GitHub Copilot, Cursor IDE), Web Explorer MCP prior
 
 **Perfect for:** Developers who value privacy, work with sensitive data, or prefer not to depend on external services and subscriptions.
 
+## ⚠️ Responsible Use
+
+This tool is designed for **human-assisted AI interactions**, not for automated high-volume scraping:
+
+- 🚫 **Not for DDoS** - Do not use for overwhelming websites or search engines
+- 🚫 **Not for High-Speed Automation** - Avoid usage speeds significantly higher than a real user
+- 🚫 **Not for Fully Automated AI Agents** - Not recommended for high-performance autonomous agents
+- ✅ **Respect Infrastructure** - Honor website owners' business scenarios and infrastructure capabilities
+- ✅ **Follow robots.txt** - Respect crawling policies and rate limits
+
+**Use responsibly:** This tool is meant for legitimate research and development, not for abuse.
+
 ## Features
 
 - 🔍 **Web Search** - Search using local SearxNG (private, no API keys)
