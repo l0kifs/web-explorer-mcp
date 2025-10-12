@@ -100,9 +100,54 @@ def reset_logger():
     logger.remove()  # Clean up after test
 
 
+@pytest.fixture(scope="function")
+async def mcp_client():
+    """
+    MCP client fixture for e2e testing.
+
+    Provides a connected MCP client instance using in-memory transport.
+    Automatically connects before test and disconnects after.
+
+    Scope: function - each test gets its own isolated client instance
+    to avoid state pollution and resource conflicts between tests.
+
+    IMPORTANT: This fixture also ensures proper cleanup of Playwright resources
+    by closing the browser context after each test to prevent WebSocket connection
+    issues and resource leaks between sequential test runs.
+    """
+    from tests.mcp_client import MCPClient
+    from web_explorer_mcp.entrypoints.mcp.server import mcp, web_explorer_service
+
+    client = MCPClient(mcp)
+    await client.connect()
+
+    try:
+        yield client
+    finally:
+        # Disconnect MCP client
+        await client.disconnect()
+
+        # Critical: Fully stop Playwright service to prevent connection reuse issues
+        # This ensures each test starts with a completely fresh Playwright instance
+        # including new browser connection, context, and page
+        try:
+            content_service = web_explorer_service._content_service  # type: ignore
+            if hasattr(content_service, "stop"):
+                await content_service.stop()  # type: ignore
+                import logging
+
+                logging.info("Playwright service stopped successfully after test")
+        except Exception as e:
+            # Log but don't fail the test on cleanup errors
+            import logging
+
+            logging.warning(f"Error stopping Playwright service: {e}")
+
+
 # Test markers
 def pytest_configure(config):
     """Configure pytest with custom markers."""
     config.addinivalue_line("markers", "unit: mark test as unit test")
     config.addinivalue_line("markers", "integration: mark test as integration test")
+    config.addinivalue_line("markers", "e2e: mark test as end-to-end test")
     config.addinivalue_line("markers", "slow: mark test as slow running")

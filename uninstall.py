@@ -48,7 +48,7 @@ def main():
     os.chdir(project_dir)
 
     # Stop and remove Docker containers
-    print("\n1. Stopping and removing Docker containers...")
+    print("\n1. Stopping and removing Docker containers (SearxNG + Playwright)...")
     result = run_command(["docker", "compose", "down", "-v"], check=False)
     if result.returncode == 0:
         print("✓ Docker containers and volumes removed")
@@ -79,6 +79,8 @@ def main():
     print("\n" + "=" * 50)
     print("Uninstallation Complete!")
     print("=" * 50)
+    print()
+    print("Docker services (SearxNG + Playwright) have been stopped and removed.")
     print()
     print("To completely remove the project:")
     print("  cd ..")

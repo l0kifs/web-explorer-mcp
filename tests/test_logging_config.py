@@ -18,7 +18,9 @@ class TestLoggingConfig:
 
         try:
             settings = LoggingSettings(
+                log_to_console=True,
                 console_log_level="DEBUG",
+                log_to_file=True,
                 file_log_level="INFO",
                 log_file_path=temp_log_file,
                 log_file_format="text",
@@ -60,7 +62,9 @@ class TestLoggingConfig:
 
         try:
             settings = LoggingSettings(
+                log_to_console=True,
                 console_log_level="WARNING",
+                log_to_file=True,
                 file_log_level="ERROR",
                 log_file_path=temp_log_file,
                 log_file_format="json",
@@ -89,7 +93,9 @@ class TestLoggingConfig:
     def test_logging_config_no_file(self, mock_logger):
         """Test logging configuration without log file."""
         settings = LoggingSettings(
+            log_to_console=True,
             console_log_level="INFO",
+            log_to_file=False,
             file_log_level="INFO",
             log_file_path="",  # Empty string means no file logging
             log_file_format="text",
@@ -112,7 +118,9 @@ class TestLoggingConfig:
     @patch("web_explorer_mcp.config.logging_config.logger")
     def test_logging_config_invalid_format(self, mock_logger):
         """Test logging configuration with invalid format raises ValueError."""
-        settings = LoggingSettings(log_file_format="invalid")
+        settings = LoggingSettings(
+            log_to_file=True, log_file_path="test.log", log_file_format="invalid"
+        )
 
         try:
             logging_config(settings)
@@ -133,7 +141,7 @@ class TestLoggingConfig:
     @patch("web_explorer_mcp.config.logging_config.logger")
     def test_logging_config_console_handler_setup(self, mock_logger):
         """Test that console handler is configured correctly."""
-        settings = LoggingSettings(console_log_level="DEBUG")
+        settings = LoggingSettings(log_to_console=True, console_log_level="DEBUG")
 
         logging_config(settings)
 
@@ -158,6 +166,7 @@ class TestLoggingConfig:
 
         try:
             settings = LoggingSettings(
+                log_to_file=True,
                 file_log_level="WARNING",
                 log_file_path=temp_log_file,
                 log_file_format="text",

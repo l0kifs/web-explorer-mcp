@@ -90,6 +90,12 @@ export WEB_EXPLORER_MCP_WEB_SEARCH_TIMEOUT=20
 # Maximum characters for webpage content (default: 5000)
 export WEB_EXPLORER_MCP_WEBPAGE_MAX_CHARS=10000
 
+# Playwright remote server URL (default: http://127.0.0.1:9012)
+export WEB_EXPLORER_MCP_PLAYWRIGHT_CONNECTION_URL="http://localhost:9012"
+
+# Playwright timeout in seconds (default: 30)
+export WEB_EXPLORER_MCP_PLAYWRIGHT_TIMEOUT=30
+
 # Enable debug mode (default: false)
 export WEB_EXPLORER_MCP_DEBUG=true
 ```
@@ -124,13 +130,15 @@ export WEB_EXPLORER_MCP_DEBUG=true
 
 ## Management
 
-**SearxNG:**
+**Docker Services (SearxNG + Playwright):**
 ```bash
-docker compose logs -f searxng    # View logs
-docker compose restart searxng    # Restart
-docker compose up -d              # Start
-docker compose down               # Stop
-docker compose pull && docker compose up -d  # Update
+docker compose logs -f searxng    # View SearxNG logs
+docker compose logs -f playwright # View Playwright logs
+docker compose restart searxng    # Restart SearxNG
+docker compose restart playwright # Restart Playwright
+docker compose up -d              # Start all services
+docker compose down               # Stop all services
+docker compose pull && docker compose up -d  # Update all services
 ```
 
 **MCP Server:**
@@ -146,14 +154,18 @@ sudo systemctl start docker  # Linux
 # Or start Docker Desktop
 ```
 
-**Port 9011 in use:**
-Change port in `docker-compose.yml` and update `WEB_EXPLORER_MCP_WEB_SEARCH_SEARXNG_URL` env var.
+**Port 9011 or 9012 in use:**
+Change port in `docker-compose.yml` and update corresponding env vars:
+- `WEB_EXPLORER_MCP_WEB_SEARCH_SEARXNG_URL` for SearxNG
+- `WEB_EXPLORER_MCP_PLAYWRIGHT_CONNECTION_URL` for Playwright
 
-**SearxNG not accessible:**
+**Services not accessible:**
 ```bash
 docker compose ps                  # Check status
-docker compose logs searxng        # Check logs
-curl http://localhost:9011         # Test connection
+docker compose logs searxng        # Check SearxNG logs
+docker compose logs playwright     # Check Playwright logs
+curl http://localhost:9011         # Test SearxNG
+curl http://localhost:9012         # Test Playwright
 ```
 
 **Claude doesn't see tools:**

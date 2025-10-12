@@ -209,3 +209,6 @@ __marimo__/
 # SearxNG Docker config (except settings.yml template)
 searxng-config/uwsgi.ini
 searxng-config/__pycache__/
+
+# Playwright MCP
+.playwright-mcp/

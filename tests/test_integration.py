@@ -19,8 +19,8 @@ class TestPackageImports:
     def test_web_integration_import(self):
         """Test that web integration can be imported."""
         assert web is not None
-        assert hasattr(web, "web_search_extractor")
-        assert hasattr(web, "webpage_content_extractor")
+        assert hasattr(web, "PlaywrightWebpageContentService")
+        assert hasattr(web, "SearxngWebSearchService")
 
     def test_config_import(self):
         """Test that config package can be imported."""
@@ -52,15 +52,15 @@ class TestIntegrationWorkflow:
         assert app_settings.webpage is not None
 
     def test_extractor_imports(self):
-        """Test that extractors can be imported and instantiated."""
+        """Test that new services can be imported and instantiated."""
         from web_explorer_mcp.integrations.web import (
-            web_search_extractor,
-            webpage_content_extractor,
+            PlaywrightWebpageContentService,
+            SearxngWebSearchService,
         )
 
-        # Functions should be importable
-        assert callable(web_search_extractor)
-        assert callable(webpage_content_extractor)
+        # Classes should be importable
+        assert PlaywrightWebpageContentService is not None
+        assert SearxngWebSearchService is not None
 
     @pytest.mark.integration
     def test_mcp_server_creation(self):
