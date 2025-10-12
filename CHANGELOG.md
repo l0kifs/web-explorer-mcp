@@ -16,6 +16,71 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - None yet
 
+## [0.3.0] - 2025-10-12
+
+### Added
+- **Clean Architecture implementation** with clear layer separation:
+  - `models/` layer for data entities (independent, no external dependencies)
+  - `business/` layer for business logic and interface definitions
+  - `integrations/` layer for external system integrations (Playwright, SearxNG)
+  - `entrypoints/` layer for MCP server and dependency composition
+- **New services architecture**:
+  - `PlaywrightWebpageContentService` - modern content extraction using Playwright
+  - `SearxngWebSearchService` - dedicated search service with proper error handling
+  - `WebExplorerService` - main business service orchestrating search and content extraction
+- **Comprehensive E2E test suite** for real-world scenarios:
+  - GitHub Issues page content extraction tests
+  - Stack Overflow page content extraction tests
+  - General webpage content tool E2E tests
+  - MCP server integration tests with real client
+- **Unit tests** for all new services:
+  - Business logic tests with mocked dependencies
+  - Pagination utility tests
+  - Service integration tests
+- **Enhanced installation process**:
+  - Automatic Playwright browsers installation
+  - Improved error handling in installation scripts
+  - Dependency validation during setup
+- **Responsible use guidelines** in README:
+  - Ethical web scraping practices
+  - robots.txt compliance
+  - Rate limiting recommendations
+  - Terms of Service considerations
+- **MCP client utility** for testing (`tests/mcp_client.py`)
+
+### Changed
+- **Refactored architecture** following Clean Architecture principles:
+  - Clear separation of concerns across layers
+  - Dependency inversion with protocol-based interfaces
+  - Improved testability through dependency injection
+- **Improved test structure**:
+  - Separated unit tests from E2E tests
+  - Added `slow` marker for tests requiring network access
+  - Enhanced test configuration in pytest
+- **Updated installation scripts** (`install.sh`, `install.fish`):
+  - Better error messages and user feedback
+  - Automatic browser installation for Playwright
+  - Improved cross-platform compatibility
+- **Enhanced configuration**:
+  - Added browser timeout settings
+  - Improved logging configuration
+  - Better error handling in services
+- **Updated documentation**:
+  - Expanded CONFIGURATION.md with Playwright settings
+  - Added architecture overview
+  - Improved usage examples
+
+### Removed
+- **Legacy extractors** replaced by new service architecture:
+  - Removed `web_search_extractor.py` (replaced by `SearxngWebSearchService`)
+  - Removed `webpage_content_extractor.py` (replaced by `PlaywrightWebpageContentService`)
+- **Deprecated test files** for old extractors
+
+### Fixed
+- Improved error handling in content extraction
+- Better handling of dynamic content loading
+- Enhanced reliability of web page parsing
+
 ## [0.2.0] - 2025-10-08
 
 ### Added

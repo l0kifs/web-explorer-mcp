@@ -1,6 +1,6 @@
 [project]
 name = "web-explorer-mcp"
-version = "0.2.0"
+version = "0.3.0"
 description = "MCP server for web search and content extraction using SearxNG"
 readme = "README.md"
 requires-python = ">=3.12"
