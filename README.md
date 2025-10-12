@@ -20,13 +20,13 @@ Unlike commercial solutions (GitHub Copilot, Cursor IDE), Web Explorer MCP prior
 ## Features
 
 - 🔍 **Web Search** - Search using local SearxNG (private, no API keys)
-- 📄 **Content Extraction** - Extract clean text from webpages
+- 📄 **Content Extraction** - Extract clean text from webpages with Playwright rendering
 - 🐳 **Zero Pollution** - Runs in Docker, leaves no traces
-- 🚀 **Simple Setup** - Install in 2 commandsorer MCP
+- 🚀 **Simple Setup** - Install in 2 commands
 
 ## Quick Start
 
-### 1. Install SearxNG
+### 1. Install Services (SearxNG + Playwright)
 
 ```bash
 git clone https://github.com/l0kifs/web-explorer-mcp.git
@@ -70,7 +70,7 @@ See [docs/CONFIGURATION.md](docs/CONFIGURATION.md) for:
 
 ```bash
 uvx --force web-explorer-mcp  # MCP server
-docker compose pull && docker compose up -d  # SearxNG
+docker compose pull && docker compose up -d  # SearxNG + Playwright
 ```
 
 ## Uninstall
@@ -84,7 +84,7 @@ cd .. && rm -rf web-explorer-mcp
 
 ```bash
 uv sync              # Install dependencies
-docker compose up -d # Start SearxNG
+docker compose up -d # Start SearxNG + Playwright
 uv run web-explorer-mcp  # Run locally
 ```
 

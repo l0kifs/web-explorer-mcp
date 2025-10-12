@@ -47,9 +47,9 @@ if test -f $SETTINGS_FILE
     end
 end
 
-# Start SearxNG with Docker Compose
+# Start services with Docker Compose
 echo ""
-echo "Starting SearxNG with Docker Compose..."
+echo "Starting SearxNG and Playwright with Docker Compose..."
 docker compose up -d
 
 # Wait for SearxNG to be ready
@@ -69,6 +69,23 @@ else
     echo -e "$GREEN✓$NC SearxNG is running at http://localhost:9011"
 end
 
+# Wait for Playwright to be ready
+echo "Waiting for Playwright server to start..."
+set RETRIES 30
+while not curl -s http://localhost:9012 > /dev/null 2>&1; and test $RETRIES -gt 0
+    echo -n "."
+    sleep 1
+    set RETRIES (math $RETRIES - 1)
+end
+echo ""
+
+if test $RETRIES -eq 0
+    echo -e "$YELLOW Warning: Playwright server might not be fully ready yet.$NC"
+    echo "You can check the status with: docker compose logs playwright"
+else
+    echo -e "$GREEN✓$NC Playwright is running at http://localhost:9012"
+end
+
 echo ""
 echo -e "$GREEN================================$NC"
 echo -e "$GREEN Installation Complete!$NC"
@@ -85,9 +102,10 @@ echo ""
 echo "3. Configure your AI client (e.g., Claude Desktop):"
 echo "   See docs/CONFIGURATION.md for examples"
 echo ""
-echo "To stop SearxNG:"
+echo "To stop services:"
 echo -e "   $YELLOW docker compose down$NC"
 echo ""
-echo "To view SearxNG logs:"
+echo "To view logs:"
 echo -e "   $YELLOW docker compose logs -f searxng$NC"
+echo -e "   $YELLOW docker compose logs -f playwright$NC"
 echo ""
