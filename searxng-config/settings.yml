@@ -23,6 +23,7 @@ search:
   formats:
     - html
     - json
+    # json enabled for programmatic API access
 
 ui:
   default_theme: simple
