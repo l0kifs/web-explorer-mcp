@@ -16,6 +16,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - None yet
 
+## [0.3.1] - 2025-10-25
+
+### Fixed
+- **SearxNG configuration updated** for compatibility with latest SearxNG versions:
+  - Added `use_default_settings: true` to leverage default settings from searx/settings.yml
+  - Added required `brand:` section with `new_issue_url` and `docs_url`
+  - Re-enabled JSON format for programmatic API access
+  - Simplified engine configuration to avoid redundancy
+  - Removed deprecated settings (doi_resolvers, enabled_plugins, static_use_hash)
+
+### Changed
+- Simplified `searxng-config/settings.yml` structure using default settings inheritance
+
 ## [0.3.0] - 2025-10-12
 
 ### Added
